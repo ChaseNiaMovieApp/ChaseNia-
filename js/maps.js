@@ -1,13 +1,16 @@
 export const mapMovies = ({title, rating, genre, director, plot, id}) => {
-    return `<tr data-id="${id}" >
-                       <td>
-                            <h1>${title}</h1>
-                       </td>
-                       <td data-id="${id}" class="user-record">${title}.</td>
+    return `<div class="card" style="width:200px"> 
+    <img class="card-img-top" src="">
+    <div class="card-body" >
+    <h3 class="card-title">${title}</h3>
+    <p class="card-text">${plot}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">${genre}</li>
+    <li class="list-group-item">${rating}</li>
+    <li class="list-group-item">${director}</li>
+    <li class="list-group-item">${id}</li>
+    </ul>
 
-                       <td>
-                            <button class="delete" value="${id}">X</button>
-                            <button class="edit" value="${id}">Edit</button>
-                       </td>
-                   </tr>`
+</div>`
 };

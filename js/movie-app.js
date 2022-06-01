@@ -28,7 +28,21 @@ fetch(baseURL)
         //     }
         // }
     })
-    // .then(() => document.getElementById("movies").innerHTML = "");
+// .then(() => document.getElementById("movies").innerHTML = "");
+
+document.getElementById("submit").addEventListener("click", function () {
+    let movie = {
+        title: $("#title").val(),
+        genre: $("#genre").val(),
+        rating: $("#rating").val(),
+        director: $("#director").val(),
+        plot: $("#plot").val()
+    }
+    console.log(movie);
+})
+
+
+
 
 // TODO delete posts
 
