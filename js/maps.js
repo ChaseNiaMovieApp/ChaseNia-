@@ -30,5 +30,18 @@ export const removeMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID,id
     <li class="list-group-item">${Director}</li>
     </ul>
     <button class="remove-button" data-id="${id}">Remove</button>
+    <button class="edit-button" data-id="${id}">Edit</button>
 </div>`
 };
+
+
+export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID,id}) => {
+    return `<label htmlFor="Title">Title</label><input type="text">
+        <label htmlFor="imdBRating">imdBRating</label><input type="text">
+        <label htmlFor="Genre">Genre</label><input type="text">
+        <label htmlFor="Director">Director</label><input type="text">
+        <label htmlFor="Plot"></label>Plot<input type="text">
+        <label htmlFor="imdbID"></label><input type="hidden">
+        <label htmlFor="id"></label><input type="hidden">
+        <button id="edit-button">Submit</button>
+    `}

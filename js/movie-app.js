@@ -52,10 +52,18 @@ $("body").on("click", ".remove-button", function (event){
             headers: {"Content-Type": "application/json"}
         }
         fetch (glitchURL + event.target.getAttribute("data-id"), settings)
-            .then(loadPage())
+            .then(res => loadPage())
 
 });
+$("body").on("click", ".edit-button", function (event){
+    let settings = {
+        method: "PATCH",
+        headers: {"Content-Type": "application/json"}
+    }
+    fetch (glitchURL + event.target.getAttribute("data-id"), settings)
+        .then(res => loadPage())
 
+});
 
 // TODO delete posts
 
