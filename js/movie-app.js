@@ -1,4 +1,4 @@
-import {mapMovies} from "./maps.js";
+import {mapMovies, removeMovie} from "./maps.js";
 import {OMDB_API_KEY} from "./keys.js";
 import {titleURL, fetchSettings} from "./constants.js";
 
@@ -9,24 +9,24 @@ const glitchURL = "https://exclusive-radical-peak.glitch.me/movies/";
 // - > fetch request
 // then -> convert to json object to handle
 // find the missing titles to delete
-document.getElementById("movies").innerHTML = "LOADING..."
-fetch(glitchURL, fetchSettings)
-    .then(res =>
-        res.json())
-    .then(res => { // array of movies
-        console.log(res)
-        document.getElementById("movies").innerHTML = ""
-        res.map(mapMovies).forEach(function(movie){
-            $("#movies").append(movie);
-            console.log(movie);
+function loadPage () {
+    document.getElementById("movies").innerHTML = "LOADING..."
+    fetch(glitchURL, fetchSettings)
+        .then(res =>
+            res.json())
+        .then(res => { // array of movies
+            document.getElementById("movies").innerHTML = ""
+            res.map(removeMovie).forEach(function (movie) {
+                $("#movies").append(movie);
+            });
         });
-    });
-
+}
+loadPage()
 // Search for a movie
 document.getElementById("submit").addEventListener("click", function () {
     let title = $("#search-bar").val()
     console.log(title);
-    fetch(`${titleURL}${title}&apikey=${OMDB_API_KEY}`, fetchSettings)
+    fetch(`${titleURL}${title}&apikey=${OMDB_API_KEY}`)
         .then(res =>
             res.json())
         .then(res => { // array of movies
@@ -38,11 +38,22 @@ document.getElementById("submit").addEventListener("click", function () {
                     method: "POST",
                     body: JSON.stringify(res)
                 }
+                console.log(settings);
                 fetch(glitchURL, settings)
                     .then(res => res.json())
-                    .then(res => console.log(res))
+                    .then(res => loadPage())
+
             })
-        }).then(res => console.log(res))
+        })
+});
+$("body").on("click", ".remove-button", function (event){
+        let settings = {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"}
+        }
+        fetch (glitchURL + event.target.getAttribute("data-id"), settings)
+            .then(loadPage())
+
 });
 
 
