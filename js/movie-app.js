@@ -5,10 +5,6 @@ import {titleURL, fetchSettings} from "./constants.js";
 const glitchURL = "https://exclusive-radical-peak.glitch.me/movies/";
 
 
-//1. get all the items
-// - > fetch request
-// then -> convert to json object to handle
-// find the missing titles to delete
 function loadPage() {
     document.getElementById("movies").innerHTML = "LOADING...";
     fetch(glitchURL, fetchSettings)
@@ -16,6 +12,7 @@ function loadPage() {
             res.json())
         .then(res => { // array of movies
             document.getElementById("movies").innerHTML = "";
+            console.log(res);
             res.map(removeMovie).forEach(function (movie) {
                 $("#movies").append(movie);
             });
@@ -24,7 +21,7 @@ function loadPage() {
 
 loadPage()
 
-// Search for a movie
+// Search for a movie/add a movie
 document.getElementById("submit").addEventListener("click", function () {
     let title = $("#search-bar").val();
     console.log(title);
@@ -48,6 +45,7 @@ document.getElementById("submit").addEventListener("click", function () {
         });
 });
 
+// Delete a movie
 $("body").on("click", ".remove-button", function (event) {
     let settings = {
         method: "DELETE",
@@ -58,21 +56,36 @@ $("body").on("click", ".remove-button", function (event) {
     fetch(glitchURL + event.target.getAttribute("data-id"), settings)
         .then(res => loadPage());
 });
-$("body").on("click", ".edit-button", function (event) {
 
-    let settings = {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        }
-        // body:
-    }
-    fetch(glitchURL + event.target.getAttribute("data-id"), settings)
-        .then(res => loadPage());
+// Edit a movie form
+$("body").on("click", ".edit-button", function (event) {
+    let movieID = event.target.getAttribute("data-id");
+    fetch(glitchURL, fetchSettings)
+        .then(res => res.json())
+        .then(res => {
+            let movieObj =
+                res.forEach(function (movie) {
+                    console.log(movie.id);
+                    if (movieID == movie.id) {
+                        console.log(movie);
+                        movieObj = movie;
+                    }
+                });
+            console.log(movieObj);
+        });
 });
 
-// TODO delete posts
-
-// TODO add posts
+// Save edited form
+$("#edit-button").on("click", function(event){
+let settings = {
+    method: "PATCH",
+    headers: {
+        "Content-Type": "application/json"
+    }
+    // body:
+}
+fetch(glitchURL + event.target.getAttribute("data-id"), settings)
+    .then(res => loadPage());
+});
 
 // TODO html format
