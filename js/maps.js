@@ -29,8 +29,10 @@ export const removeMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, i
     <li class="list-group-item">${imdbRating}</li>
     <li class="list-group-item">${Director}</li>
     </ul>
-    <button class="remove-button" data-id="${id}">Remove</button>
-    <button class="edit-button" data-id="${id}">Edit</button>
+    <div class="d-flex col justify-content-evenly align-items-end">
+    <button style="width: 120px; height: 30px;" class="orange-btn remove-button btn btn-sm" data-id="${id}">Remove</button>
+    <button style="width: 120px; height: 30px;" class="orange-btn edit-button btn btn-sm" data-id="${id}">Edit</button>
+    </div>
 </div>`
 };
 
