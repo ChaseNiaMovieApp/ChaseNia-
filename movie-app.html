@@ -9,11 +9,16 @@
     <script src="js/movie-app.js" type="module"></script>
 </head>
 <body>
-<input id="search-bar" type="text" name="search" placeholder="Search a Movie">
-<button id="submit" type="submit">Submit</button>
-<main class="d-flex">
-    <section>
-        <div class="row" id="movies">
+<div class="d-flex justify-content-center py-3">
+    <input id="search-bar" type="text" name="search" placeholder="Search a Movie">
+    <button id="submit" type="submit">Submit</button>
+</div>
+<form id="edit-form">
+
+</form>
+<main>
+    <section class="d-flex m-auto">
+        <div class="justify-content-evenly row" id="movies">
         </div>
     </section>
 </main>

@@ -35,13 +35,12 @@ export const removeMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, i
 };
 
 export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
-    return `<label For="Title">Title</label><input id="title" type="text">
-        <label For="imdBRating">imdBRating</label><input id="imdBRating" type="text">
-        <label For="Genre">Genre</label><input id="genre" type="text">
-        <label For="Director">Director</label><input id="director" type="text">
-        <label For="Plot"></label>Plot<input id="Plot" type="text">
-        <label For="imdbID"></label><input id="imdbID" type="hidden">
-        <label For="id"></label><input id="id" type="hidden">
-        <button id="edit-button">Submit</button>
-    `
+    return `<label For="Title">Title</label><input id="title" type="text" value="${Title}">
+        <label For="imdBRating">imdBRating</label><input id="imdbRating" type="text" value="${imdbRating}">
+        <label For="Genre">Genre</label><input id="genre" type="text"  value="${Genre}">
+        <label For="Director">Director</label><input id="director" type="text" value="${Director}">
+        <label For="Plot"></label>Plot<input id="plot" type="text" value="${Plot}">
+        <label For="imdbID"></label><input id="imdbID" type="hidden" value="${imdbID}">
+        <label For="id"></label><input id="id" type="hidden" value="${id}">
+        <button id="update-movie">Submit</button>`
 };

@@ -1,4 +1,4 @@
-import {mapMovies, removeMovie} from "./maps.js";
+import {mapMovies, removeMovie, editMovie} from "./maps.js";
 import {OMDB_API_KEY} from "./keys.js";
 import {titleURL, fetchSettings} from "./constants.js";
 
@@ -12,14 +12,13 @@ function loadPage() {
             res.json())
         .then(res => { // array of movies
             document.getElementById("movies").innerHTML = "";
-            console.log(res);
             res.map(removeMovie).forEach(function (movie) {
                 $("#movies").append(movie);
             });
         });
 }
 
-loadPage()
+loadPage();
 
 // Search for a movie/add a movie
 document.getElementById("submit").addEventListener("click", function () {
@@ -28,8 +27,7 @@ document.getElementById("submit").addEventListener("click", function () {
     fetch(`${titleURL}${title}&apikey=${OMDB_API_KEY}`)
         .then(res =>
             res.json())
-        .then(res => { // array of movies
-            console.log(res)
+        .then(res => {
             document.getElementById("movies").innerHTML = mapMovies(res)
             $("#add-button").on("click", function () {
                 let settings = {
@@ -37,7 +35,6 @@ document.getElementById("submit").addEventListener("click", function () {
                     method: "POST",
                     body: JSON.stringify(res)
                 }
-                console.log(settings);
                 fetch(glitchURL, settings)
                     .then(res => res.json())
                     .then(res => loadPage())
@@ -57,35 +54,43 @@ $("body").on("click", ".remove-button", function (event) {
         .then(res => loadPage());
 });
 
-// Edit a movie form
+// Generate an edit movie form
 $("body").on("click", ".edit-button", function (event) {
     let movieID = event.target.getAttribute("data-id");
-    fetch(glitchURL, fetchSettings)
+    fetch(glitchURL + movieID, fetchSettings)
         .then(res => res.json())
         .then(res => {
-            let movieObj =
-                res.forEach(function (movie) {
-                    console.log(movie.id);
-                    if (movieID == movie.id) {
-                        console.log(movie);
-                        movieObj = movie;
-                    }
-                });
-            console.log(movieObj);
+            $("#edit-form").html(editMovie(res))
+            console.log(res);
+            console.log(editMovie(res));
+            console.log($("#title").val());
+            $("#update-movie").on("click", updateMovieInfo);
         });
 });
 
-// Save edited form
-$("#edit-button").on("click", function(event){
-let settings = {
-    method: "PATCH",
-    headers: {
-        "Content-Type": "application/json"
+// Update movie info
+function updateMovieInfo(event) {
+    event.preventDefault();
+    const movie = {
+        Title: $("#title").val(),
+        imdbRating: $("#imdbRating").val(),
+        Genre: $("#genre").val(),
+        Director: $("#director").val(),
+        Plot: $("#plot").val(),
+        imdbID: $("#imdbID").val(),
+        id: $("#id").val()
     }
-    // body:
+    console.log(movie);
+    let settings = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(movie)
+    }
+    fetch(glitchURL + movie.id, settings)
+        .then(movie => movie.json());
+    loadPage();
 }
-fetch(glitchURL + event.target.getAttribute("data-id"), settings)
-    .then(res => loadPage());
-});
 
 // TODO html format
