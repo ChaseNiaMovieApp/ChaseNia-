@@ -56,9 +56,11 @@ $("body").on("click", ".remove-button", function (event){
 
 });
 $("body").on("click", ".edit-button", function (event){
+
     let settings = {
         method: "PATCH",
         headers: {"Content-Type": "application/json"}
+        // body:
     }
     fetch (glitchURL + event.target.getAttribute("data-id"), settings)
         .then(res => loadPage())
