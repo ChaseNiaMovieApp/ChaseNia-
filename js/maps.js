@@ -17,7 +17,7 @@ export const mapMovies = ({Title, imdbRating, Genre, Director, Plot, imdbID}) =>
 </div>`
 };
 
-export const removeMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID,id}) => {
+export const removeMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `<div class="card" style="width:300px"> 
     <img class="card-img-top" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}">
     <div class="card-body">
@@ -34,8 +34,7 @@ export const removeMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID,id
 </div>`
 };
 
-
-export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID,id}) => {
+export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `<label For="Title">Title</label><input id="title" type="text">
         <label For="imdBRating">imdBRating</label><input id="imdBRating" type="text">
         <label For="Genre">Genre</label><input id="genre" type="text">
@@ -44,4 +43,5 @@ export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID,id})
         <label For="imdbID"></label><input id="imdbID" type="hidden">
         <label For="id"></label><input id="id" type="hidden">
         <button id="edit-button">Submit</button>
-    `}
+    `
+};
