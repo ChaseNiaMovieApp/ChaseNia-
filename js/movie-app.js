@@ -69,8 +69,8 @@ $("body").on("click", ".edit-button", function (event) {
 });
 
 // Update movie info
-function updateMovieInfo(event) {
-    event.preventDefault();
+function updateMovieInfo() {
+    // event.preventDefault();
     const movie = {
         Title: $("#title").val(),
         imdbRating: $("#imdbRating").val(),

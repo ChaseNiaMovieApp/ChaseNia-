@@ -5,14 +5,12 @@ body {
 
 .card {
     background-color: #929292;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px;
     padding: 5px;
 }
 
 .list-group-item {
     background-color: #929292;
-
 }
 
 .orange-btn {
@@ -24,11 +22,13 @@ form {
     display: flex;
     justify-content: center;
 }
+
 #submit {
     border-radius: 4px;
     background-color: #FF7400;
     color: white;
 }
+
 nav {
     background-color: #929292;
 }
