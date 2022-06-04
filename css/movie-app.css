@@ -33,10 +33,9 @@ nav {
 }
 
 #logo-img {
-    width: 100px;
+    width: 80px;
     border: 0;
     padding: 0;
-    position: absolute;
 }
 
 #slider {
@@ -53,16 +52,24 @@ nav {
     margin: auto;
 }
 
-.controller {
-    display: flex;
-    justify-content: space-between;
-}
+/*.controller {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*}*/
 
 #controls {
     color: white;
     font-size: 1em;
+    display: flex;
+    justify-content: space-between;
 }
 
+.previous {
+    margin-left: 20px;
+}
+.next {
+    margin-right: 20px;
+}
 .previous, .next {
     padding: 2px;
     width: 30px;
@@ -75,8 +82,9 @@ nav {
 
 .previous:hover, .next:hover{
     box-shadow: 0 0 5px #929292;
-
 }
+
+
 
 @media (max-width: 1600px) {
     .container {

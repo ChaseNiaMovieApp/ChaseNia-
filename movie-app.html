@@ -18,9 +18,9 @@
 </head>
 <body style="background-image: url('img/moviebackground.png')">
 <nav class="navbar navbar-light">
-    <div class="container-fluid">
+    <div class="container-fluid justify-content-between">
         <img id="logo-img" src="img/NiaChangoLogo.png" alt="logo image">
-        <div class="d-flex justify-content-end py-3">
+        <div class="d-flex py-3">
             <input id="search-bar" type="text" name="search" placeholder="Search for a movie">
             <button class="btn btn-outline" id="submit" type="submit">Search</button>
         </div>
@@ -30,31 +30,30 @@
 </form>
 <main>
     <section id="slider">
+        <div class="controller">
+            <div id="controls">
+                <button class="previous"><i class="fa-solid fa-angle-left"></i></button>
+                <button class="next"><i class="fa-solid fa-angle-right"></i></button>
+            </div>
+        </div>
         <div class="container">
             <div class="subcontainer">
                 <div class="slider-wrapper">
-                    <div class="controller">
-                        <div id="controls">
-                            <button class="previous"><i class="fa-solid fa-angle-left"></i></button>
-                            <button class="next"><i class="fa-solid fa-angle-right"></i></button>
-                        </div>
-                    </div>
                     <br>
                     <div class="my-slider">
                         <div id="movies">
-                            <div class="slide">
-                                <a href="#">Learn More</a>
-                            </div>
+                            movies go here
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </section>
-<!--    <section class="d-flex m-auto justify-content-center">-->
-<!--        <div class="justify-content-evenly row" id="movies">-->
-<!--        </div>-->
-<!--    </section>-->
+    <!--    <section class="d-flex m-auto justify-content-center">-->
+    <!--        <div class="justify-content-evenly row" id="movies">-->
+    <!--        </div>-->
+    <!--    </section>-->
 </main>
 <!-- JQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

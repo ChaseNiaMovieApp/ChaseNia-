@@ -1,4 +1,4 @@
-import {mapMovies, removeMovie, editMovie} from "./maps.js";
+import {mapAddMovie, mapPopulateMovies, editMovie} from "./maps.js";
 import {OMDB_API_KEY} from "./keys.js";
 import {titleURL, fetchSettings} from "./constants.js";
 
@@ -12,7 +12,7 @@ function loadPage() {
             res.json())
         .then(res => { // array of movies
             document.getElementById("movies").innerHTML = "";
-            res.map(removeMovie).forEach(function (movie) {
+            res.map(mapPopulateMovies).forEach(function (movie) {
                 console.log(movie);
                 $("#movies").append(movie);
             });
@@ -29,7 +29,7 @@ document.getElementById("submit").addEventListener("click", function () {
         .then(res =>
             res.json())
         .then(res => {
-            document.getElementById("movies").innerHTML = mapMovies(res)
+            document.getElementById("movies").innerHTML = mapAddMovie(res)
             $("#add-button").on("click", function () {
                 let settings = {
                     ...fetchSettings,
