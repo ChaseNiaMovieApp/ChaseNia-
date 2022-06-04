@@ -1,5 +1,6 @@
 body {
     background-color: #333333;
+
 }
 
 .card {
@@ -23,3 +24,16 @@ form {
     display: flex;
     justify-content: center;
 }
+#submit {
+    border-radius: 4px;
+    background-color: #FF7400;
+    color: white;
+}
+nav {
+    background-color: #929292;
+}
+
+img {
+    width: 80px;
+}
+

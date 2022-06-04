@@ -92,5 +92,8 @@ function updateMovieInfo(event) {
         .then(movie => movie.json());
     loadPage();
 }
+$("#logo-img").on('click', function (){
+    loadPage();
+})
 
 // TODO html format

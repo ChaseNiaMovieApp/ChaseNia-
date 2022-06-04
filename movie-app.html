@@ -8,11 +8,20 @@
     <link href="/css/movie-app.css" type="text/css" rel="stylesheet">
     <script src="js/movie-app.js" type="module"></script>
 </head>
-<body>
-<div class="d-flex justify-content-center py-3">
-    <input id="search-bar" type="text" name="search" placeholder="Search a Movie">
-    <button id="submit" type="submit">Submit</button>
-</div>
+<body style="background-image: url('img/moviebackground.png')">
+<nav class="navbar navbar-light">
+    <div class="container-fluid">
+        <img id="logo-img" src="img/NiaChangoLogo.png">
+        <div  class="d-flex justify-content-center py-3">
+            <input id="search-bar" type="text" name="search" placeholder="Search a Movie">
+            <button class="btn btn-outline" id="submit" type="submit">Search</button>
+        </div>
+    </div>
+</nav>
+<!--<div class="d-flex justify-content-center py-3">-->
+<!--    <input id="search-bar" type="text" name="search" placeholder="Search a Movie">-->
+<!--    <button id="submit" type="submit">Submit</button>-->
+<!--</div>-->
 <form id="edit-form">
 </form>
 <main>
