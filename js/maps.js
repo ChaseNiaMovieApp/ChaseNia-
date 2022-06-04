@@ -1,8 +1,8 @@
 import {imgURL} from "./constants.js";
 import {OMDB_API_KEY} from "./keys.js";
 
-export const mapMovies = ({Title, imdbRating, Genre, Director, Plot, imdbID}) => {
-    return `<div class="card" style="width:300px"> 
+export const mapMovies = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
+    return `<div class="card slide-img img-${id}" style="width:300px"> 
     <img class="card-img-top" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster">
     <div class="card-body">
     <h3 class="card-title">${Title}</h3>
@@ -18,7 +18,8 @@ export const mapMovies = ({Title, imdbRating, Genre, Director, Plot, imdbID}) =>
 };
 
 export const removeMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
-    return `<div class="card" style="width:300px"> 
+    return `<div>
+    <div class="card slide-img img-${id}" style="width:250px"> 
     <img class="card-img-top" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}">
     <div class="card-body">
     <h3 class="card-title">${Title}</h3>
@@ -30,10 +31,11 @@ export const removeMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, i
     <li class="list-group-item">${Director}</li>
     </ul>
     <div class="d-flex col justify-content-evenly align-items-end">
-    <button style="width: 120px; height: 30px;" class="orange-btn remove-button btn btn-sm" data-id="${id}">Remove</button>
-    <button style="width: 120px; height: 30px;" class="orange-btn edit-button btn btn-sm" data-id="${id}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
+    <button style="width: 100px; height: 30px;" class="orange-btn remove-button btn btn-sm" data-id="${id}">Remove</button>
+    <button style="width: 100px; height: 30px;" class="orange-btn edit-button btn btn-sm" data-id="${id}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
     </div>
-</div>`
+    </div>
+    </div>`
 };
 
 export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {

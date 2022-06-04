@@ -13,6 +13,7 @@ function loadPage() {
         .then(res => { // array of movies
             document.getElementById("movies").innerHTML = "";
             res.map(removeMovie).forEach(function (movie) {
+                console.log(movie);
                 $("#movies").append(movie);
             });
         });
