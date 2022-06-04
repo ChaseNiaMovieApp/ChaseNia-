@@ -69,8 +69,8 @@ $("body").on("click", ".edit-button", function (event) {
 });
 
 // Update movie info
-function updateMovieInfo() {
-    // event.preventDefault();
+function updateMovieInfo(event) {
+    event.preventDefault();
     const movie = {
         Title: $("#title").val(),
         imdbRating: $("#imdbRating").val(),
@@ -80,7 +80,7 @@ function updateMovieInfo() {
         imdbID: $("#imdbID").val(),
         id: $("#id").val()
     }
-    console.log(movie);
+    $("#edit-form").html("");
     let settings = {
         method: "PATCH",
         headers: {
@@ -92,6 +92,7 @@ function updateMovieInfo() {
         .then(movie => movie.json());
     loadPage();
 }
+
 $("#logo-img").on('click', function (){
     loadPage();
 })

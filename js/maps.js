@@ -31,20 +31,20 @@ export const removeMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, i
     </ul>
     <div class="d-flex col justify-content-evenly align-items-end">
     <button style="width: 120px; height: 30px;" class="orange-btn remove-button btn btn-sm" data-id="${id}">Remove</button>
-    <button style="width: 120px; height: 30px;" class="orange-btn edit-button btn btn-sm" data-id="${id}">Edit</button>
+    <button style="width: 120px; height: 30px;" class="orange-btn edit-button btn btn-sm" data-id="${id}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>
     </div>
 </div>`
 };
 
 export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `<div class="card" style="width: 80%">
-    <label For="Title">Title</label><input class="" id="title" type="text" value="${Title}">
-    <label For="imdBRating">imdBRating</label><input id="imdbRating" type="text" value="${imdbRating}">
-    <label For="Genre">Genre</label><input id="genre" type="text"  value="${Genre}">
-    <label For="Director">Director</label><input id="director" type="text" value="${Director}">
-    <label For="Plot"></label>Plot<textarea id="plot">${Plot}</textarea>
-    <label For="imdbID"></label><input id="imdbID" type="hidden" value="${imdbID}">
-    <label For="id"></label><input id="id" type="hidden" value="${id}">
+    <label for="Title">Title</label><input class="" id="title" type="text" value="${Title}">
+    <label for="imdBRating">imdBRating</label><input id="imdbRating" type="text" value="${imdbRating}">
+    <label for="Genre">Genre</label><input id="genre" type="text" value="${Genre}">
+    <label for="Director">Director</label><input id="director" type="text" value="${Director}">
+    <label for="Plot"></label>Plot<textarea id="plot">${Plot}</textarea>
+    <label for="imdbID"></label><input id="imdbID" type="hidden" value="${imdbID}">
+    <label for="id"></label><input id="id" type="hidden" value="${id}">
     <button class="orange-btn" id="update-movie">Submit</button>
 </div>`
 };
