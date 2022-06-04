@@ -5,7 +5,7 @@ body {
 .card {
     background-color: #929292;
     margin: 20px;
-    padding: 5px;
+    padding: 1px;
 }
 
 .list-group-item {
@@ -13,19 +13,18 @@ body {
 }
 
 .orange-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #FF7400;
     color: white;
+    border-radius: 4px;
+    border: 0;
 }
 
 form {
     display: flex;
     justify-content: center;
-}
-
-#submit {
-    border-radius: 4px;
-    background-color: #FF7400;
-    color: white;
 }
 
 nav {
@@ -36,6 +35,21 @@ nav {
     width: 80px;
     border: 0;
     padding: 0;
+}
+
+.slide-img {
+    width: fit-content;
+    border: 3px solid #929292;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.slide-img:hover {
+    box-shadow: 0 0 0 10px #FF7400;
 }
 
 #slider {
@@ -52,11 +66,6 @@ nav {
     margin: auto;
 }
 
-/*.controller {*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*}*/
-
 #controls {
     color: white;
     font-size: 1em;
@@ -67,9 +76,11 @@ nav {
 .previous {
     margin-left: 20px;
 }
+
 .next {
     margin-right: 20px;
 }
+
 .previous, .next {
     padding: 2px;
     width: 30px;
@@ -80,10 +91,9 @@ nav {
     font-size: 3em;
 }
 
-.previous:hover, .next:hover{
+.previous:hover, .next:hover {
     box-shadow: 0 0 5px #929292;
 }
-
 
 
 @media (max-width: 1600px) {

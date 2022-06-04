@@ -2,27 +2,22 @@ import {imgURL} from "./constants.js";
 import {OMDB_API_KEY} from "./keys.js";
 
 export const mapAddMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
-    return `<div class="card slide-img img-${id}" style="width:300px"> 
-    <img class="card-img-top" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster">
-    <div class="card-body">
-    <h3 class="card-title">${Title}</h3>
-    <p class="card-text">${Plot}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-    <li class="list-group-item">${Genre}</li>
-    <li class="list-group-item">${imdbRating}</li>
-    <li class="list-group-item">${Director}</li>
-    </ul>
-    <button id="add-button">Add</button>
+    return `<div class="slide-img img-${id}"> 
+    <img src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster">
+    <button class="orange-btn py-3 mt-1" id="add-button">Add Movie</button>
 </div>`
 };
 
 export const mapPopulateMovies = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
-    return `<div>
-    <div class="card slide-img img-${id}" style="width:250px"> 
-    <img class="card-img-top" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}">
+    return `
+<div>
+    <div class="slide">
+        <div class="slide-img img-${id}">
+            <img src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" style="width: 250px">
+        </div>
     </div>
-    </div>`
+</div>
+`
 };
 
 export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
@@ -38,10 +33,22 @@ export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}
 </div>`
 };
 
+// TODO from mapAddMovie function, need to use this information for an
+// TODO img click event that pumps this, as a modal, into the html, when adding a movie
 
+//     <div className="card-body">
+//         <h3 className="card-title">${Title}</h3>
+//         <p className="card-text">${Plot}</p>
+//     </div>
+//     <ul className="list-group list-group-flush">
+//         <li className="list-group-item">${Genre}</li>
+//         <li className="list-group-item">${imdbRating}</li>
+//         <li className="list-group-item">${Director}</li>
+//     </ul>
 
 // TODO from mapPopulateMovies function, need to use this information for an
-// TODO img click event that pumps this, as a modal, into the html
+// TODO img click event that pumps this, as a modal, into the html to view more info
+// TODO of existing movies
 // <div className="card-body">
 //     <h3 className="card-title">${Title}</h3>
 //     <p className="card-text">${Plot}</p>
