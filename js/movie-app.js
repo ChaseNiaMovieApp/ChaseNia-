@@ -4,25 +4,26 @@ import {titleURL, fetchSettings} from "./constants.js";
 
 const glitchURL = "https://exclusive-radical-peak.glitch.me/movies/";
 
+
 function loadPage() {
-    document.getElementById("movies").innerHTML = "LOADING...";
+    document.querySelector(".carousel-inner").innerHTML = "LOADING...";
     fetch(glitchURL, fetchSettings)
         .then(res => res.json())
         .then(res => {
-            document.getElementById("movies").innerHTML = "";
+            document.querySelector(".carousel-inner").innerHTML = "";
             res.forEach((movie) => {
                 if (res[0] === movie) {
                     movie = mapPopulateActiveMovie(movie);
-                    $("#movies").append(movie);
+                    $(".carousel-inner").append(movie);
                 } else {
                     movie = mapPopulateMovies(movie);
-                    $("#movies").append(movie)
+                    $(".carousel-inner").append(movie)
                 }
             })
         })
         .then(res => {
             console.log(res);
-            $("#movies").append(
+            $(".carousel-inner").append(
                 // `</div>
                 //     <button class="carousel-control-prev" type="button" data-bs-target="myCarousel" data-bs-slide="prev">
                 //     <span class="previous" aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
@@ -34,6 +35,25 @@ function loadPage() {
                 //     </button>`
             )
         })
+        .then(res => {
+
+            // function from codeply.com
+            let items = document.querySelectorAll('.carousel .carousel-item')
+
+            items.forEach((el) => {
+                const minPerSlide = 3
+                let next = el.nextElementSibling
+                for (var i = 1; i < minPerSlide; i++) {
+                    if (!next) {
+                        // wrap carousel by using first child
+                        next = items[0]
+                    }
+                    let cloneChild = next.cloneNode(true)
+                    el.appendChild(cloneChild.children[0])
+                    next = next.nextElementSibling
+                }
+            })
+        })
 }
 
 loadPage();
@@ -41,12 +61,13 @@ loadPage();
 // Search for a movie/add a movie
 document.getElementById("submit").addEventListener("click", function () {
     let title = $("#search-bar").val();
+    console.log("yo");
     console.log(title);
     fetch(`${titleURL}${title}&apikey=${OMDB_API_KEY}`)
         .then(res =>
             res.json())
         .then(res => {
-            document.getElementById("movies").innerHTML = mapAddMovie(res)
+            document.querySelector(".carousel-inner").innerHTML = mapAddMovie(res)
             $("#add-button").on("click", function () {
                 let settings = {
                     ...fetchSettings,

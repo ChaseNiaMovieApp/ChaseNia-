@@ -27,23 +27,25 @@
 <form id="edit-form">
 </form>
 <main>
-    <div class="container font-weight-light">Movies
-        <div class="d-flex justify-content-center">
+    <div class="container text-center my-3">
+        <h2 class="font-weight-light">Movies</h2>
+        <div class="row mx-auto my-auto justify-content-center">
             <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div id="movies" class="carousel-inner">
+                <div class="carousel-inner" role="listbox">
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="myCarousel" data-bs-slide="prev">
-                <span class="previous" aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="myCarousel" data-bs-slide="next">
-                <span class="next" aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
     </div>
-    <!-- the closing div is generated dynamically by the JS -->
+    <div class="">
+        <div class="carousel-control-prev bg-transparent arrow-buttons" href="#myCarousel" role="button"
+             data-bs-slide="prev">
+            <i class="fa-solid fa-angle-left previous" aria-hidden="true"></i>
+        </div>
+        <div class="carousel-control-next bg-transparent arrow-buttons" href="#myCarousel" role="button"
+             data-bs-slide="next">
+            <i class="fa-solid fa-angle-right next" aria-hidden="true"></i>
+        </div>
+    </div>
 </main>
 <!-- JQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

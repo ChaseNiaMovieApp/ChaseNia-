@@ -15,7 +15,13 @@ export const mapAddMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, i
 export const mapPopulateActiveMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `
 <div class="carousel-item active">
-    <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image">
+    <div class="col-md-4">
+        <div class="">
+            <div class="">
+                <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image">
+            </div>
+        </div>
+    </div>
 </div>
 `
 }
@@ -23,7 +29,13 @@ export const mapPopulateActiveMovie = ({Title, imdbRating, Genre, Director, Plot
 export const mapPopulateMovies = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `
 <div class="carousel-item">
-    <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image">
+    <div class="col-md-4">
+        <div class="">
+            <div class="">
+                <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image">
+            </div>
+        </div>
+    </div>
 </div>
 `
 };
