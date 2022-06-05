@@ -2,26 +2,29 @@ import {imgURL} from "./constants.js";
 import {OMDB_API_KEY} from "./keys.js";
 
 export const mapAddMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
-    return `<div class="slide-img img-${id}"> 
-    <img src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster">
-    <button class="orange-btn py-3 mt-1" id="add-button">Add Movie</button>
-</div>`
+    return `
+<div class="d-flex justify-content-center">
+    <div class="card slide-img">
+        <img src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster">
+        <button class="orange-btn py-3 mt-1" id="add-button">Add Movie</button>
+    </div>
+</div>
+`
 };
 
 export const mapPopulateMovies = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `
 <div>
     <div class="slide">
-        <div class="slide-img img-${id}">
-            <img src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" style="width: 250px">
-        </div>
+        <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image">
     </div>
 </div>
 `
 };
 
 export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
-    return `<div class="card" style="width: 80%">
+    return `
+<div class="card" style="width: 80%">
     <label for="Title">Title</label><input class="" id="title" type="text" value="${Title}">
     <label for="imdBRating">imdBRating</label><input id="imdbRating" type="text" value="${imdbRating}">
     <label for="Genre">Genre</label><input id="genre" type="text" value="${Genre}">
@@ -30,7 +33,8 @@ export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}
     <label for="imdbID"></label><input id="imdbID" type="hidden" value="${imdbID}">
     <label for="id"></label><input id="id" type="hidden" value="${id}">
     <button class="orange-btn" id="update-movie">Submit</button>
-</div>`
+</div>
+`
 };
 
 // TODO from mapAddMovie function, need to use this information for an

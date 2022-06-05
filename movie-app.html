@@ -8,11 +8,11 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!--    Font Awesome CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!--    Tiny Slider CDNs-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
     <!--    Custom CSS-->
     <link href="css/movie-app.css" type="text/css" rel="stylesheet">
-    <!--    Font Awesome Tiny Slider JS CDN-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
     <!--    Custom JS-->
     <script src="js/movie-app.js" type="module"></script>
 </head>
@@ -30,26 +30,25 @@
 </form>
 <main>
     <section id="slider">
-        <div class="controller">
-            <div id="controls">
-                <button class="previous"><i class="fa-solid fa-angle-left"></i></button>
-                <button class="next"><i class="fa-solid fa-angle-right"></i></button>
-            </div>
-        </div>
         <div class="container">
             <div class="subcontainer">
                 <div class="slider-wrapper">
-                    <br>
-                    <div class="my-slider d-flex" id="movies">
+                    <div class="controller">
+                        <div>
+                            <h2>Movies</h2>
+                        </div>
+                        <div id="controls">
+                            <button class="previous"><i class="fa-solid fa-angle-left"></i></button>
+                            <button class="next"><i class="fa-solid fa-angle-right"></i></button>
+                        </div>
                     </div>
+                    <div class="my-slider" id="movies">
+                    </div>
+                    <br>
                 </div>
             </div>
         </div>
     </section>
-    <!--    <section class="d-flex m-auto justify-content-center">-->
-    <!--        <div class="justify-content-evenly row" id="movies">-->
-    <!--        </div>-->
-    <!--    </section>-->
 </main>
 <!-- JQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

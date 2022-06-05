@@ -1,11 +1,18 @@
+*{
+    margin: 0;
+}
+
 body {
+    color: white;
     background-color: #333333;
 }
 
 .card {
+    width: 300px;
     background-color: #929292;
-    margin: 20px;
     padding: 1px;
+    display: flex;
+    justify-content: center;
 }
 
 .list-group-item {
@@ -37,23 +44,35 @@ nav {
     padding: 0;
 }
 
-.slide-img {
-    width: fit-content;
-    border: 3px solid #929292;
-    border-radius: 4px;
-    cursor: pointer;
+#slider {
+    height: 500px;
+    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.slide {
+    border: 0;
+    margin: 10px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-img {
+    width: 50%;
+    height:50%;
+    border-radius: 5px;
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
     transition: 0.5s;
 }
 
 .slide-img:hover {
     box-shadow: 0 0 0 10px #FF7400;
-}
-
-#slider {
-    height: 500px;
 }
 
 .container {

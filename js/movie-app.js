@@ -6,31 +6,10 @@ const glitchURL = "https://exclusive-radical-peak.glitch.me/movies/";
 
 let slider = tns({
     container: ".my-slider",
-    "slideBy": 1,
-    "speed": 400,
-    "nav": false,
-    controlsContainer: "#controls",
-    prevButton: ".previous",
-    nextButton: ".next",
-    responsive: {
-        1600: {
-            items: 4,
-            gutter: 20
-        },
-        1024: {
-            items: 3,
-            gutter: 20
-        },
-        768: {
-            items: 2,
-            gutter: 20
-        },
-        480: {
-            items: 1,
-        }
-    }
+    items: 1,
+    slideBy: "page",
+    speed: 400
 })
-
 function loadPage() {
     document.getElementById("movies").innerHTML = "LOADING...";
     fetch(glitchURL, fetchSettings)
@@ -42,15 +21,13 @@ function loadPage() {
                 console.log(movie);
                 $("#movies").append(movie);
             });
-        });
+        })
 }
-
 loadPage();
 
 // Search for a movie/add a movie
 document.getElementById("submit").addEventListener("click", function () {
     let title = $("#search-bar").val();
-    console.log(title);
     fetch(`${titleURL}${title}&apikey=${OMDB_API_KEY}`)
         .then(res =>
             res.json())
@@ -120,7 +97,7 @@ function updateMovieInfo(event) {
     loadPage();
 }
 
-$("#logo-img").on('click', function (){
+$("#logo-img").on('click', function () {
     loadPage();
 })
 
