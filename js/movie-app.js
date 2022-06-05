@@ -1,33 +1,47 @@
-import {mapAddMovie, mapPopulateMovies, editMovie} from "./maps.js";
+import {mapAddMovie, mapPopulateMovies, editMovie, mapPopulateActiveMovie} from "./maps.js";
 import {OMDB_API_KEY} from "./keys.js";
 import {titleURL, fetchSettings} from "./constants.js";
 
 const glitchURL = "https://exclusive-radical-peak.glitch.me/movies/";
 
-let slider = tns({
-    container: ".my-slider",
-    items: 1,
-    slideBy: "page",
-    speed: 400
-})
 function loadPage() {
     document.getElementById("movies").innerHTML = "LOADING...";
     fetch(glitchURL, fetchSettings)
-        .then(res =>
-            res.json())
-        .then(res => { // array of movies
+        .then(res => res.json())
+        .then(res => {
             document.getElementById("movies").innerHTML = "";
-            res.map(mapPopulateMovies).forEach(function (movie) {
-                console.log(movie);
-                $("#movies").append(movie);
-            });
+            res.forEach((movie) => {
+                if (res[0] === movie) {
+                    movie = mapPopulateActiveMovie(movie);
+                    $("#movies").append(movie);
+                } else {
+                    movie = mapPopulateMovies(movie);
+                    $("#movies").append(movie)
+                }
+            })
+        })
+        .then(res => {
+            console.log(res);
+            $("#movies").append(
+                // `</div>
+                //     <button class="carousel-control-prev" type="button" data-bs-target="myCarousel" data-bs-slide="prev">
+                //     <span class="previous" aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
+                //     <span class="visually-hidden">Previous</span>
+                //     </button>
+                //     <button class="carousel-control-next" type="button" data-bs-target="myCarousel" data-bs-slide="next">
+                //     <span class="next" aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
+                //     <span class="visually-hidden">Next</span>
+                //     </button>`
+            )
         })
 }
+
 loadPage();
 
 // Search for a movie/add a movie
 document.getElementById("submit").addEventListener("click", function () {
     let title = $("#search-bar").val();
+    console.log(title);
     fetch(`${titleURL}${title}&apikey=${OMDB_API_KEY}`)
         .then(res =>
             res.json())
@@ -97,7 +111,7 @@ function updateMovieInfo(event) {
     loadPage();
 }
 
-$("#logo-img").on('click', function () {
+$("#logo-img").on("click", function () {
     loadPage();
 })
 

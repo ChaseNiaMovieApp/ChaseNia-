@@ -1,7 +1,3 @@
-*{
-    margin: 0;
-}
-
 body {
     color: white;
     background-color: #333333;
@@ -11,8 +7,8 @@ body {
     width: 300px;
     background-color: #929292;
     padding: 1px;
-    display: flex;
-    justify-content: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
 }
 
 .list-group-item {
@@ -44,52 +40,15 @@ nav {
     padding: 0;
 }
 
-#slider {
-    height: 500px;
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.slide {
-    border: 0;
-    margin: 10px;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .slide-img {
-    width: 50%;
-    height:50%;
     border-radius: 5px;
-    background-position: center;
-    background-size: cover;
     cursor: pointer;
     transition: 0.5s;
 }
 
 .slide-img:hover {
+    border: 5px solid #FF7400;
     box-shadow: 0 0 0 10px #FF7400;
-}
-
-.container {
-    width: 1600px;
-    margin: auto;
-}
-
-.subcontainer {
-    width: 85%;
-    margin: auto;
-}
-
-#controls {
-    color: white;
-    font-size: 1em;
-    display: flex;
-    justify-content: space-between;
 }
 
 .previous {
@@ -115,8 +74,33 @@ nav {
 }
 
 
-@media (max-width: 1600px) {
-    .container {
-        width: 100%;
-    }
-}
+/*@media (max-width: 768px) {*/
+/*    .carousel-inner .carousel-item > div {*/
+/*        display: none;*/
+/*    }*/
+/*    .carousel-inner .carousel-item > div:first-child {*/
+/*        display: block;*/
+/*    }*/
+/*}*/
+
+/*.carousel-inner .carousel-item.active,*/
+/*.carousel-inner .carousel-item-next,*/
+/*.carousel-inner .carousel-item-prev {*/
+/*    display: flex;*/
+/*}*/
+
+/*@media (min-width: 768px) {*/
+/*    .carousel-inner .carousel-item-right.active,*/
+/*    .carousel-inner .carousel-item-next {*/
+/*        transform: translateX(33.333%);*/
+/*    }*/
+/*    .carousel-inner .carousel-item-left.active,*/
+/*    .carousel-inner .carousel-item-prev {*/
+/*        transform: translateX(-33.333%);*/
+/*    }*/
+/*}*/
+
+/*.carousel-inner .carousel-item-right,*/
+/*.carousel-inner .carousel-item-left {*/
+/*    transform: translateX(0);*/
+/*}*/
