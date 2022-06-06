@@ -4,7 +4,7 @@ import {OMDB_API_KEY} from "./keys.js";
 export const mapAddMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `
 <div class="d-flex justify-content-center">
-    <div class="card slide-img">
+    <div class="card slide-img" style="width: 300px">
         <img src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster">
         <button class="orange-btn py-3 mt-1" id="add-button">Add Movie</button>
     </div>
@@ -15,7 +15,7 @@ export const mapAddMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, i
 export const mapPopulateActiveMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `
 <div class="carousel-item active">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="">
             <div class="">
                 <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image">
@@ -29,7 +29,7 @@ export const mapPopulateActiveMovie = ({Title, imdbRating, Genre, Director, Plot
 export const mapPopulateMovies = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `
 <div class="carousel-item">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="">
             <div class="">
                 <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image">

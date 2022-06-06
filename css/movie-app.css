@@ -44,15 +44,8 @@ nav {
 }
 
 .slide-img:hover {
+    width: 100%;
     box-shadow: 0 0 0 5px #FF7400;
-}
-/*.button-container {*/
-/*    position: relative;*/
-/*    align-items: center;*/
-/*    vertical-align: center;*/
-/*}*/
-
-.arrow-buttons {
 }
 
 .previous {
