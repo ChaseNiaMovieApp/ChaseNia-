@@ -1,11 +1,11 @@
-import {imgURL} from "./constants.js";
+import {movieImgURL} from "./constants.js";
 import {OMDB_API_KEY} from "./keys.js";
 
 export const mapAddMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `
 <div class="d-flex justify-content-center">
     <div class="card slide-img" style="width: 300px">
-        <img src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster" id="${imdbID}">
+        <img src="${movieImgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster" id="${imdbID}">
         <button class="orange-btn py-3 mt-1" id="add-button">Add Movie</button>
     </div>
 </div>
@@ -18,7 +18,7 @@ export const mapPopulateActiveMovie = ({Title, imdbRating, Genre, Director, Plot
     <div class="col-md-3">
         <div class="">
             <div class="">
-                <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image" id="${imdbID}">
+                <img class="slide-img" src="${movieImgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image" id="${imdbID}">
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@ export const mapPopulateMovies = ({Title, imdbRating, Genre, Director, Plot, imd
     <div class="col-md-3">
         <div class="">
             <div class="">
-                <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image" id="${imdbID}">
+                <img class="slide-img" src="${movieImgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image" id="${imdbID}">
             </div>
         </div>
     </div>
@@ -40,7 +40,9 @@ export const mapPopulateMovies = ({Title, imdbRating, Genre, Director, Plot, imd
 `
 };
 
-export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
+// export const mapMovieInfo = ()
+
+export const mapEditMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `
 <div class="card" style="width: 80%">
     <label for="Title">Title</label><input class="" id="title" type="text" value="${Title}">
@@ -58,15 +60,24 @@ export const editMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}
 // TODO from mapAddMovie function, need to use this information for an
 // TODO img click event that pumps this, as a modal, into the html, when adding a movie
 
-//     <div className="card-body">
-//         <h3 className="card-title">${Title}</h3>
-//         <p className="card-text">${Plot}</p>
-//     </div>
-//     <ul className="list-group list-group-flush">
-//         <li className="list-group-item">${Genre}</li>
-//         <li className="list-group-item">${imdbRating}</li>
-//         <li className="list-group-item">${Director}</li>
-//     </ul>
+export const mapMovieInfo = ({Title, imdbRating, Genre, Director, Plot, imdbID, id, Actors}) => {
+    return `
+<div class="modal-wrapper container">
+        <span class="movie-modal-title">${Title}</span>
+        <p class="movie-modal-body">
+            <span>${Plot}<br></span>
+            <span>Featuring: ${Actors}<br></span>
+            <span>Director: ${Director}<br></span>
+            <span>${Genre}<br></span>
+        </p>
+        <div class="info-button-wrapper">
+            <button class="info-button info-close">Close</button>
+            <button class="info-button info-edit">Edit</button>
+            <button class="info-button info-delete">Delete</button>
+        </div>
+</div>
+`
+}
 
 // TODO from mapPopulateMovies function, need to use this information for an
 // TODO img click event that pumps this, as a modal, into the html to view more info

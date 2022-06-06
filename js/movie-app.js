@@ -1,6 +1,6 @@
-import {mapAddMovie, mapPopulateMovies, editMovie, mapPopulateActiveMovie} from "./maps.js";
+import {mapAddMovie, mapPopulateMovies, mapPopulateActiveMovie, mapEditMovie, mapMovieInfo} from "./maps.js";
 import {OMDB_API_KEY} from "./keys.js";
-import {titleURL, fetchSettings} from "./constants.js";
+import {movieIdURL, movieTitleURL, fetchSettings} from "./constants.js";
 
 const glitchURL = "https://exclusive-radical-peak.glitch.me/movies/";
 
@@ -21,14 +21,14 @@ function loadPage() {
                 }
             })
         })
-        .then(res => {
+        .then(() => {
             // function from codeply.com
             let items = document.querySelectorAll('.carousel .carousel-item');
 
             items.forEach((el) => {
                 const minPerSlide = 4;
                 let next = el.nextElementSibling;
-                for (var i = 1; i < minPerSlide; i++) {
+                for (let i = 1; i < minPerSlide; i++) {
                     if (!next) {
                         // wrap carousel by using first child
                         next = items[0]
@@ -39,14 +39,28 @@ function loadPage() {
                 }
             })
         })
-        // function that targets specific movie poster and injects modal
-        .then(() => {
-            $(".slide-img").on("click", (e) => {
-                e.preventDefault();
-                console.log(e.target.id);
-                console.log("yo");
-            });
-        })
+        .then(() => $(".slide-img").on("click", (e) => {
+                let movieID = e.target.id;
+                let settings = {
+                    method: "GET",
+                }
+                fetch(`${movieIdURL}${movieID}&apikey=${OMDB_API_KEY}`, settings)
+                    .then(res => res.json())
+                    .then(res => {
+                        let movie = {
+                            Title: res.Title,
+                            Genre: res.Genre,
+                            Plot: res.Plot,
+                            Actors: res.Actors,
+                            Director: res.Director,
+                            imdbID: res.imdbID,
+                            id: res.id,
+                        }
+                        console.log(movie);
+                        $("#modal-container").html(mapMovieInfo(movie))
+                    })
+            })
+        )
 }
 
 loadPage();
@@ -54,7 +68,7 @@ loadPage();
 // Search for a movie/add a movie
 document.getElementById("submit").addEventListener("click", () => {
     let title = $("#search-bar").val();
-    fetch(`${titleURL}${title}&apikey=${OMDB_API_KEY}`)
+    fetch(`${movieTitleURL}${title}&apikey=${OMDB_API_KEY}`)
         .then(res =>
             res.json())
         .then(res => {
@@ -66,8 +80,7 @@ document.getElementById("submit").addEventListener("click", () => {
                     body: JSON.stringify(res)
                 }
                 fetch(glitchURL, settings)
-                    .then(res => res.json())
-                    .then(res => loadPage())
+                    .then(() => loadPage())
             });
         });
 });
@@ -81,7 +94,7 @@ $("body").on("click", ".remove-button", (event) => {
         }
     }
     fetch(glitchURL + event.target.getAttribute("data-id"), settings)
-        .then(res => loadPage());
+        .then(() => loadPage());
 });
 
 // Generate an edit movie form
@@ -90,9 +103,9 @@ $("body").on("click", ".edit-button", (event) => {
     fetch(glitchURL + movieID, fetchSettings)
         .then(res => res.json())
         .then(res => {
-            $("#edit-form").html(editMovie(res))
+            $("#edit-form").html(mapEditMovie(res))
             console.log(res);
-            console.log(editMovie(res));
+            console.log(mapEditMovie(res));
             console.log($("#title").val());
             $("#update-movie").on("click", updateMovieInfo);
         });
@@ -122,5 +135,10 @@ function updateMovieInfo(event) {
         .then(movie => movie.json());
     loadPage();
 }
+
+// Clicking the logo reloads the movie html
+$("#logo-img").on("click", () => {
+    loadPage();
+});
 
 // TODO html format

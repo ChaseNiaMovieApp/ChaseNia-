@@ -3,10 +3,6 @@ body {
     background-color: #333333;
 }
 
-.list-group-item {
-    background-color: #929292;
-}
-
 .orange-btn {
     display: flex;
     justify-content: center;
@@ -20,6 +16,42 @@ body {
 form {
     display: flex;
     justify-content: center;
+}
+
+#modal-container {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-wrapper {
+    width: 500px;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-button {
+    background-color: #FF7400;
+    border: 2px solid white;
+    border-radius: 4px;
+    width: 30%;
+    margin-bottom: 10px;
+}
+
+.movie-modal-title {
+font-size: 40px;
+}
+
+.movie-modal-body {
+
 }
 
 nav {
