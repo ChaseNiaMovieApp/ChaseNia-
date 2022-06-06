@@ -5,7 +5,7 @@ export const mapAddMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, i
     return `
 <div class="d-flex justify-content-center">
     <div class="card slide-img" style="width: 300px">
-        <img src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster">
+        <img src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster" id="${imdbID}">
         <button class="orange-btn py-3 mt-1" id="add-button">Add Movie</button>
     </div>
 </div>
@@ -18,7 +18,7 @@ export const mapPopulateActiveMovie = ({Title, imdbRating, Genre, Director, Plot
     <div class="col-md-3">
         <div class="">
             <div class="">
-                <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image">
+                <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image" id="${imdbID}">
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@ export const mapPopulateMovies = ({Title, imdbRating, Genre, Director, Plot, imd
     <div class="col-md-3">
         <div class="">
             <div class="">
-                <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image">
+                <img class="slide-img" src="${imgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster image" id="${imdbID}">
             </div>
         </div>
     </div>

@@ -39,8 +39,11 @@ function loadPage() {
                 }
             })
         })
-        .then(res => {
-            $(".slide-img").on("click", () => {
+        // function that targets specific movie poster and injects modal
+        .then(() => {
+            $(".slide-img").on("click", (e) => {
+                e.preventDefault();
+                console.log(e.target.id);
                 console.log("yo");
             });
         })
@@ -119,9 +122,5 @@ function updateMovieInfo(event) {
         .then(movie => movie.json());
     loadPage();
 }
-
-// $(".slide-img").on("click", () => {
-//     loadPage()
-// });
 
 // TODO html format
