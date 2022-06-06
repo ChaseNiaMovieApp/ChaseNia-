@@ -30,6 +30,7 @@ nav {
     width: 80px;
     border: 0;
     padding: 0;
+    cursor: pointer;
 }
 
 .carousel-inner {
@@ -45,7 +46,6 @@ nav {
 
 .slide-img:hover {
     width: 100%;
-    box-shadow: 0 0 0 5px #FF7400;
 }
 
 .previous {

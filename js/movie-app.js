@@ -17,58 +17,46 @@ function loadPage() {
                     $(".carousel-inner").append(movie);
                 } else {
                     movie = mapPopulateMovies(movie);
-                    $(".carousel-inner").append(movie)
+                    $(".carousel-inner").append(movie);
                 }
             })
         })
         .then(res => {
-            console.log(res);
-            $(".carousel-inner").append(
-                // `</div>
-                //     <button class="carousel-control-prev" type="button" data-bs-target="myCarousel" data-bs-slide="prev">
-                //     <span class="previous" aria-hidden="true"><i class="fa-solid fa-angle-left"></i></span>
-                //     <span class="visually-hidden">Previous</span>
-                //     </button>
-                //     <button class="carousel-control-next" type="button" data-bs-target="myCarousel" data-bs-slide="next">
-                //     <span class="next" aria-hidden="true"><i class="fa-solid fa-angle-right"></i></span>
-                //     <span class="visually-hidden">Next</span>
-                //     </button>`
-            )
-        })
-        .then(res => {
-
             // function from codeply.com
-            let items = document.querySelectorAll('.carousel .carousel-item')
+            let items = document.querySelectorAll('.carousel .carousel-item');
 
             items.forEach((el) => {
-                const minPerSlide = 4
-                let next = el.nextElementSibling
+                const minPerSlide = 4;
+                let next = el.nextElementSibling;
                 for (var i = 1; i < minPerSlide; i++) {
                     if (!next) {
                         // wrap carousel by using first child
                         next = items[0]
                     }
-                    let cloneChild = next.cloneNode(true)
-                    el.appendChild(cloneChild.children[0])
-                    next = next.nextElementSibling
+                    let cloneChild = next.cloneNode(true);
+                    el.appendChild(cloneChild.children[0]);
+                    next = next.nextElementSibling;
                 }
             })
+        })
+        .then(res => {
+            $(".slide-img").on("click", () => {
+                console.log("yo");
+            });
         })
 }
 
 loadPage();
 
 // Search for a movie/add a movie
-document.getElementById("submit").addEventListener("click", function () {
+document.getElementById("submit").addEventListener("click", () => {
     let title = $("#search-bar").val();
-    console.log("yo");
-    console.log(title);
     fetch(`${titleURL}${title}&apikey=${OMDB_API_KEY}`)
         .then(res =>
             res.json())
         .then(res => {
             document.querySelector(".carousel-inner").innerHTML = mapAddMovie(res)
-            $("#add-button").on("click", function () {
+            $("#add-button").on("click", () => {
                 let settings = {
                     ...fetchSettings,
                     method: "POST",
@@ -82,7 +70,7 @@ document.getElementById("submit").addEventListener("click", function () {
 });
 
 // Delete a movie
-$("body").on("click", ".remove-button", function (event) {
+$("body").on("click", ".remove-button", (event) => {
     let settings = {
         method: "DELETE",
         headers: {
@@ -94,7 +82,7 @@ $("body").on("click", ".remove-button", function (event) {
 });
 
 // Generate an edit movie form
-$("body").on("click", ".edit-button", function (event) {
+$("body").on("click", ".edit-button", (event) => {
     let movieID = event.target.getAttribute("data-id");
     fetch(glitchURL + movieID, fetchSettings)
         .then(res => res.json())
@@ -132,8 +120,8 @@ function updateMovieInfo(event) {
     loadPage();
 }
 
-$("#logo-img").on("click", function () {
-    loadPage();
-})
+// $(".slide-img").on("click", () => {
+//     loadPage()
+// });
 
 // TODO html format
