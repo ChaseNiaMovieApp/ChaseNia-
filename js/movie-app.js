@@ -22,7 +22,7 @@ function loadPage() {
             })
         })
         .then(() => {
-            // function from codeply.com
+            // Function found on codeply.com, provides the functionality of the carousel buttons and autoscroll
             let items = document.querySelectorAll('.carousel .carousel-item');
 
             items.forEach((el) => {
@@ -39,65 +39,56 @@ function loadPage() {
                 }
             })
         })
-        // Allows images to be used as buttons, retrieve movie information
+        // Allows images to be used as clickable buttons, retrieve movie information
         .then(() => $(".slide-img").on("click", (e) => {
-                let movieID = e.target.id;
+                let currentMovie = e.target.id;
                 let settings = {
                     method: "GET",
                 }
-                fetch(`${movieIdURL}${movieID}&apikey=${OMDB_API_KEY}`, settings)
+                // Collects the stored movie ID from our site
+                fetch(`${glitchURL}`, settings)
                     .then(res => res.json())
                     .then(res => {
-                        let currentMovie = {
-                            Title: res.Title,
-                            Genre: res.Genre,
-                            Plot: res.Plot,
-                            Actors: res.Actors,
-                            Director: res.Director,
-                            imdbID: res.imdbID,
-                            id: ""
-                        }
-                        fetch(`${glitchURL}`, settings)
-                            .then(res => res.json())
-                            .then(res => {
-                                res.forEach(movie => {
-                                    if (currentMovie.imdbID === movie.imdbID) {
-                                        currentMovie.id = movie.id
-                                    }
-                                })
-                            })
-                            .then(() => {
-                                console.log(currentMovie.id);
-                                $("#modal-container").html(mapMovieInfo(currentMovie));
-                                $(".info-close").on("click", () => {
-                                    $("#modal-container").html("");
-                                });
-                                // Editing movie information
-                                $(".info-edit").on("click", () => {
-                                    $("#modal-container").html("");
-                                    let settings = {
-                                        method: "PATCH",
-                                        headers: {
-                                            "Content-Type": "application/json"
-                                        }
-                                    }
-                                    fetch(glitchURL + currentMovie.id, settings)
-                                        .then((res) => loadPage());
-                                })
-                                // Deleting movie information
-                                $(".info-delete").on("click", (e) => {
-                                    $("#modal-container").html("");
-                                    let settings = {
-                                        method: "DELETE",
-                                        headers: {
-                                            "Content-Type": "application/json"
-                                        }
-                                    }
-                                    fetch(glitchURL + currentMovie.id, settings)
-                                        .then((res) => loadPage());
-                                });
-                            })
+                        res.forEach(movie => {
+                            if (currentMovie === movie.imdbID) {
+                                currentMovie = movie
+                            }
+                        })
                     })
+                    .then(() => {
+                            // Outputs the selected movie information in the form of a modal
+                            $("#modal-container").html(mapMovieInfo(currentMovie));
+                            // Closes the information modal for the selected movie
+                            $(".info-close").on("click", () => {
+                                $("#modal-container").html("");
+                            });
+                            // Deletes the selected movie from the site
+                            $(".info-delete").on("click", () => {
+                                $("#modal-container").html("");
+                                let settings = {
+                                    method: "DELETE",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    }
+                                }
+                                fetch(glitchURL + currentMovie.id, settings)
+                                    .then((res) => loadPage());
+                            });
+                            //  Allows the editing of the selected movie's information
+                            $(".info-edit").on("click", () => {
+                                $("#modal-container").html(mapEditMovie(currentMovie));
+                                // Cancels any edits to the selected movie
+                                $(".edit-cancel").on("click", () => {
+                                    $("#modal-container").html("");
+                                });
+                                // Saves edits to the selected movie
+                                $(".edit-save").on("click", () => {
+                                    updateMovieInfo(currentMovie);
+                                    $("#modal-container").html("");
+                                });
+                            });
+                        }
+                    )
             })
         )
 }
@@ -107,6 +98,7 @@ loadPage();
 // Search for a movie/add a movie
 document.getElementById("submit").addEventListener("click", () => {
     let title = $("#search-bar").val();
+    $("#search-bar").val("");
     fetch(`${movieTitleURL}${title}&apikey=${OMDB_API_KEY}`)
         .then(res =>
             res.json())
@@ -124,44 +116,24 @@ document.getElementById("submit").addEventListener("click", () => {
         });
 });
 
-
-// Generate an edit movie form
-
-$("body").on("click", ".edit-button", (event) => {
-    let movieID = event.target.getAttribute("data-id");
-    fetch(glitchURL + movieID, fetchSettings)
-        .then(res => res.json())
-        .then(res => {
-            $("#edit-form").html(mapEditMovie(res))
-            console.log(res);
-            console.log(mapEditMovie(res));
-            console.log($("#title").val());
-            $("#update-movie").on("click", updateMovieInfo);
-        });
-});
-
 // Update movie info
-function updateMovieInfo(event) {
-    event.preventDefault();
-    const movie = {
-        Title: $("#title").val(),
-        imdbRating: $("#imdbRating").val(),
-        Genre: $("#genre").val(),
-        Director: $("#director").val(),
-        Plot: $("#plot").val(),
-        imdbID: $("#imdbID").val(),
-        id: $("#id").val()
-    }
-    $("#edit-form").html("");
+function updateMovieInfo(input) {
     let settings = {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(movie)
+        body: JSON.stringify({
+            "Title": $("#movie-title").val(),
+            "Plot": $("#movie-plot").val(),
+            "Actors": $("#movie-actors").val(),
+            "Director": $("#movie-director").val(),
+            "Genre": $("#movie-genre").val(),
+        })
     }
-    fetch(glitchURL + movie.id, settings)
-        .then(movie => movie.json());
+    fetch(glitchURL + input.id, settings)
+        .then(res => res.json())
+        .then(json => console.log(json))
     loadPage();
 }
 

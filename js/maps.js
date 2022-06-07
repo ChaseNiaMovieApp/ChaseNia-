@@ -4,15 +4,15 @@ import {OMDB_API_KEY} from "./keys.js";
 export const mapAddMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
     return `
 <div class="d-flex justify-content-center">
-    <div class="card slide-img" style="width: 300px">
-        <img src="${movieImgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster" id="${imdbID}">
+    <div class="card slide-img" style="width: 300px; background-color: black;">
+        <img src="${movieImgURL}${imdbID}&apikey=${OMDB_API_KEY}" alt="movie poster" id="${imdbID}" style="border-radius: 5px">
         <button class="orange-btn py-3 mt-1" id="add-button">Add Movie</button>
     </div>
 </div>
 `
 };
 
-export const mapPopulateActiveMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
+export const mapPopulateActiveMovie = ({imdbID}) => {
     return `
 <div class="carousel-item active">
     <div class="col-md-3">
@@ -26,7 +26,7 @@ export const mapPopulateActiveMovie = ({Title, imdbRating, Genre, Director, Plot
 `
 }
 
-export const mapPopulateMovies = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
+export const mapPopulateMovies = ({imdbID}) => {
     return `
 <div class="carousel-item">
     <div class="col-md-3">
@@ -42,25 +42,31 @@ export const mapPopulateMovies = ({Title, imdbRating, Genre, Director, Plot, imd
 
 // export const mapMovieInfo = ()
 
-export const mapEditMovie = ({Title, imdbRating, Genre, Director, Plot, imdbID, id}) => {
+export const mapEditMovie = ({Title, Genre, Director, Plot, Actors}) => {
     return `
-<div class="card" style="width: 80%">
-    <label for="Title">Title</label><input class="" id="title" type="text" value="${Title}">
-    <label for="imdBRating">imdBRating</label><input id="imdbRating" type="text" value="${imdbRating}">
-    <label for="Genre">Genre</label><input id="genre" type="text" value="${Genre}">
-    <label for="Director">Director</label><input id="director" type="text" value="${Director}">
-    <label for="Plot"></label>Plot<textarea id="plot">${Plot}</textarea>
-    <label for="imdbID"></label><input id="imdbID" type="hidden" value="${imdbID}">
-    <label for="id"></label><input id="id" type="hidden" value="${id}">
-    <button class="orange-btn" id="update-movie">Submit</button>
-</div>
+    <div class="modal-wrapper container">
+        <label for="movie-title"></label>
+        <input type="text" id="movie-title" value="${Title}">
+            <label for="movie-plot"></label>
+            <input type="text" id="movie-plot" value="${Plot}">
+            <label for="movie-actors"></label>
+            <input type="text" id="movie-actors" value="${Actors}">
+            <label for="movie-director"></label>
+            <input type="text" id="movie-director" value="${Director}">
+            <label for="movie-genre"></label>
+            <input type="text" id="movie-genre" value="${Genre}">
+        <div class="info-button-wrapper">
+            <button class="info-button edit-save">Save</button>
+            <button class="info-button edit-cancel">Cancel</button>
+        </div>
+    </div>
 `
 };
 
 // TODO from mapAddMovie function, need to use this information for an
 // TODO img click event that pumps this, as a modal, into the html, when adding a movie
 
-export const mapMovieInfo = ({Title, imdbRating, Genre, Director, Plot, imdbID, id, Actors}) => {
+export const mapMovieInfo = ({Title, Genre, Director, Plot, id, Actors}) => {
     return `
 <div class="modal-wrapper container">
         <span class="movie-modal-title">${Title}</span>
