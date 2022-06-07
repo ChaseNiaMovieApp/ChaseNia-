@@ -39,6 +39,7 @@ function loadPage() {
                 }
             })
         })
+        // Allows images to be used as buttons, retrieve movie information
         .then(() => $(".slide-img").on("click", (e) => {
                 let movieID = e.target.id;
                 let settings = {
@@ -47,17 +48,55 @@ function loadPage() {
                 fetch(`${movieIdURL}${movieID}&apikey=${OMDB_API_KEY}`, settings)
                     .then(res => res.json())
                     .then(res => {
-                        let movie = {
+                        let currentMovie = {
                             Title: res.Title,
                             Genre: res.Genre,
                             Plot: res.Plot,
                             Actors: res.Actors,
                             Director: res.Director,
                             imdbID: res.imdbID,
-                            id: res.id,
+                            id: ""
                         }
-                        console.log(movie);
-                        $("#modal-container").html(mapMovieInfo(movie))
+                        fetch(`${glitchURL}`, settings)
+                            .then(res => res.json())
+                            .then(res => {
+                                res.forEach(movie => {
+                                    if (currentMovie.imdbID === movie.imdbID) {
+                                        currentMovie.id = movie.id
+                                    }
+                                })
+                            })
+                            .then(() => {
+                                console.log(currentMovie.id);
+                                $("#modal-container").html(mapMovieInfo(currentMovie));
+                                $(".info-close").on("click", () => {
+                                    $("#modal-container").html("");
+                                });
+                                // Editing movie information
+                                $(".info-edit").on("click", () => {
+                                    $("#modal-container").html("");
+                                    let settings = {
+                                        method: "PATCH",
+                                        headers: {
+                                            "Content-Type": "application/json"
+                                        }
+                                    }
+                                    fetch(glitchURL + currentMovie.id, settings)
+                                        .then((res) => loadPage());
+                                })
+                                // Deleting movie information
+                                $(".info-delete").on("click", (e) => {
+                                    $("#modal-container").html("");
+                                    let settings = {
+                                        method: "DELETE",
+                                        headers: {
+                                            "Content-Type": "application/json"
+                                        }
+                                    }
+                                    fetch(glitchURL + currentMovie.id, settings)
+                                        .then((res) => loadPage());
+                                });
+                            })
                     })
             })
         )
@@ -85,19 +124,9 @@ document.getElementById("submit").addEventListener("click", () => {
         });
 });
 
-// Delete a movie
-$("body").on("click", ".remove-button", (event) => {
-    let settings = {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }
-    fetch(glitchURL + event.target.getAttribute("data-id"), settings)
-        .then(() => loadPage());
-});
 
 // Generate an edit movie form
+
 $("body").on("click", ".edit-button", (event) => {
     let movieID = event.target.getAttribute("data-id");
     fetch(glitchURL + movieID, fetchSettings)
@@ -136,9 +165,10 @@ function updateMovieInfo(event) {
     loadPage();
 }
 
-// Clicking the logo reloads the movie html
+// Clicking the logo reloads the movies' html elements
 $("#logo-img").on("click", () => {
     loadPage();
 });
+
 
 // TODO html format

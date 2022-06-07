@@ -69,6 +69,7 @@ export const mapMovieInfo = ({Title, imdbRating, Genre, Director, Plot, imdbID, 
             <span>Featuring: ${Actors}<br></span>
             <span>Director: ${Director}<br></span>
             <span>${Genre}<br></span>
+            <label for="id"></label><input id="id" type="hidden" value="${id}">
         </p>
         <div class="info-button-wrapper">
             <button class="info-button info-close">Close</button>
